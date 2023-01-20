@@ -6,14 +6,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-public class Entity {
-
+public abstract class Entity {
     protected int x;
     protected int y;
     protected int width;
     protected int height;
-    private BufferedImage sprite;
-    private Rectangle bounds;
+    protected BufferedImage sprite;
+    protected final Rectangle hitBox;
 
     public Entity(int x, int y, int width, int height, BufferedImage sprite) {
         this.x = x;
@@ -22,7 +21,7 @@ public class Entity {
         this.height = height;
         this.sprite = sprite;
 
-        bounds = new Rectangle(0, 0, 16, 16);
+        hitBox = new Rectangle(this.getX(), this.getY(), this.getWidth(), this.getHeight());
     }
 
     public int getX() {
@@ -47,6 +46,29 @@ public class Entity {
 
     public int getHeight() {
         return height;
+    }
+
+    public Rectangle getHitBox() {
+        return hitBox;
+    }
+
+    public void drawHitbox(Graphics g) {
+        // for debbug
+        g.setColor(Color.RED);
+        g.drawRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
+    }
+
+    public void updateHitbox(int xOffSet, int yOffSet) {
+        hitBox.x = x + xOffSet;
+        hitBox.y = y + yOffSet;
+    }
+
+    public BufferedImage getSprite() {
+        return sprite;
+    }
+
+    public void checkCollision() {
+
     }
 
     public void destroy() {
