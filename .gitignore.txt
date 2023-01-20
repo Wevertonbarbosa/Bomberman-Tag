@@ -1,4 +1,5 @@
 .mtj.tmp/
+out/
 *.class
 *.jar
 *.war
